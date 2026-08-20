@@ -4,18 +4,15 @@ Base reutilizável em Next.js, TypeScript, App Router e Tailwind para experiênc
 
 ## Arquitetura
 
-- `src/app`: rotas, layout global e estilos/tokens.
-- `src/components/ui`: componentes-base neutros e reutilizáveis.
-- `src/content/celebration.ts`: conteúdo e recursos ativos da celebração.
-- `public/images/celebrations/<slug>`: fotos de cada celebração (quando adicionadas).
+- `src/content/celebration.ts`: única fonte de conteúdo, fotos, links, paleta e blocos ativos.
+- `src/app`: composição da página, metadados e tokens visuais.
+- `src/components`: componentes neutros, sem dados fixos de uma celebração.
+- `public/images/celebrations/<slug>`: arquivos locais de cada celebração.
 
-## Módulos
+## Criar uma celebração
 
-1. `invitation`: site-convite com história, data e local.
-2. `gifts`: lista de presentes.
-3. `rsvp`: confirmação de presença.
-4. `gallery`: galeria compartilhada.
+Duplique e edite somente o objeto `celebration` em `src/content/celebration.ts`: troque nomes, data, local, textos, links e fotos; ajuste `theme` se quiser outra paleta; ative ou desative seções em `blocks`. Dados opcionais ausentes não são renderizados. Não coloque conteúdo específico dentro dos componentes.
 
-## Reutilização
+## Produtos
 
-Cada nova celebração deve ser criada principalmente pela troca do arquivo de configuração tipado. Componentes não devem conter nomes, datas, links ou caminhos de fotos fixos. Módulos devem respeitar as flags de `modules`, e novas exceções visuais devem primeiro virar tokens ou variantes reutilizáveis.
+`invitation` é o único módulo implementado. `gifts`, `rsvp` e `gallery` estão reservados para lista de presentes, confirmação de presença e galeria compartilhada; devem permanecer desativados até serem implementados. O bloco `confirmation` do convite é apenas um link externo configurável, e `photoGallery` é uma galeria estática.

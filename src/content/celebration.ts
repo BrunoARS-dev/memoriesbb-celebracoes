@@ -1,4 +1,15 @@
 export type CelebrationModule = "invitation" | "gifts" | "rsvp" | "gallery";
+export type InvitationBlock =
+  | "cover"
+  | "opening"
+  | "countdown"
+  | "details"
+  | "timeline"
+  | "location"
+  | "dressCode"
+  | "story"
+  | "photoGallery"
+  | "confirmation";
 
 export type CelebrationPhoto = {
   src?: string;
@@ -35,7 +46,26 @@ export type CelebrationConfig = {
   photos: { hero?: CelebrationPhoto; gallery: CelebrationPhoto[] };
   schedule: Array<{ time: string; title: string; description?: string }>;
   dressCode?: { title: string; colors?: string[] };
+  theme?: Partial<{
+    canvas: string;
+    surface: string;
+    ink: string;
+    muted: string;
+    accent: string;
+    accentContrast: string;
+    olive: string;
+    blush: string;
+    gold: string;
+    line: string;
+    footer: string;
+  }>;
+  blocks: Record<InvitationBlock, boolean>;
   labels: {
+    brandShort: string;
+    brandName: string;
+    scrollAction: string;
+    date: string;
+    time: string;
     countdown: string;
     details: string;
     timeline: string;
@@ -97,7 +127,37 @@ export const celebration = {
     title: "Traje social",
     colors: ["#5d1f2b", "#bf7d70", "#dfb7a8", "#68705a", "#ddd0bd"],
   },
+  theme: {
+    canvas: "#f7f1e7",
+    surface: "#fffaf2",
+    ink: "#321f1d",
+    muted: "#776a60",
+    accent: "#5d1f2b",
+    accentContrast: "#fffaf2",
+    olive: "#68705a",
+    blush: "#c98778",
+    gold: "#b39758",
+    line: "#d9c9b7",
+    footer: "#242722",
+  },
+  blocks: {
+    cover: true,
+    opening: true,
+    countdown: true,
+    details: true,
+    timeline: true,
+    location: true,
+    dressCode: true,
+    story: true,
+    photoGallery: true,
+    confirmation: true,
+  },
   labels: {
+    brandShort: "MB",
+    brandName: "MemoriesBB",
+    scrollAction: "Ir para o convite",
+    date: "Data",
+    time: "Horário",
     countdown: "Falta pouco",
     details: "A celebração",
     timeline: "O dia",
@@ -109,5 +169,5 @@ export const celebration = {
     rsvp: "Confirme sua presença",
     rsvpAction: "Confirmar presença",
   },
-  modules: { invitation: true, gifts: false, rsvp: true, gallery: true },
+  modules: { invitation: true, gifts: false, rsvp: false, gallery: false },
 } satisfies CelebrationConfig;
