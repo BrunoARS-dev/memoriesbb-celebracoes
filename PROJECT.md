@@ -15,4 +15,4 @@ Duplique e edite somente o objeto `celebration` em `src/content/celebration.ts`:
 
 ## Produtos
 
-`invitation` é o único módulo implementado. `gifts`, `rsvp` e `gallery` estão reservados para lista de presentes, confirmação de presença e galeria compartilhada; devem permanecer desativados até serem implementados. O bloco `confirmation` do convite é apenas um link externo configurável, e `photoGallery` é uma galeria estática.
+Cada serviço é uma experiência e uma página independente, vendida isoladamente ou conectada às demais. O Site-convite usa `/`; a Lista de presentes usa a rota definida em `celebration.gifts.route` (exemplo: `/presentes`). Para ativá-la, preencha `gifts.items` e defina `modules.gifts` como `true`. O convite só mostra seu CTA quando `gifts.invitationCtaLabel` também estiver configurado. `rsvp` e `gallery` continuam reservados e desativados.

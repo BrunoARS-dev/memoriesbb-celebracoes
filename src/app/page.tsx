@@ -4,23 +4,12 @@ import { SectionTitle } from "@/components/invitation/section-title";
 import { Container } from "@/components/ui/container";
 import { LinkButton } from "@/components/ui/link-button";
 import { celebration } from "@/content/celebration";
+import { getThemeStyle } from "@/lib/theme-style";
 
 export default function Home() {
   if (!celebration.modules.invitation) return null;
   const [firstName, secondName] = celebration.names;
-  const themeStyle = {
-    "--canvas": celebration.theme?.canvas,
-    "--surface": celebration.theme?.surface,
-    "--ink": celebration.theme?.ink,
-    "--muted": celebration.theme?.muted,
-    "--accent": celebration.theme?.accent,
-    "--accent-contrast": celebration.theme?.accentContrast,
-    "--olive": celebration.theme?.olive,
-    "--blush": celebration.theme?.blush,
-    "--gold": celebration.theme?.gold,
-    "--line": celebration.theme?.line,
-    "--footer": celebration.theme?.footer,
-  } as CSSProperties;
+  const themeStyle = getThemeStyle(celebration.theme);
 
   return (
     <main style={themeStyle}>
@@ -102,6 +91,14 @@ export default function Home() {
         <section className="story-section"><Container className="story-layout"><div className="story-art" aria-hidden="true"><span /></div><div><SectionTitle>{celebration.labels.story}</SectionTitle><p className="body-copy">{celebration.texts.story}</p></div></Container></section>
       ) : null}
 
+      {celebration.modules.gifts && celebration.gifts?.items.length && celebration.gifts.invitationCtaLabel ? (
+        <section className="service-link-section" aria-label={celebration.gifts.title}>
+          <Container>
+            <LinkButton href={celebration.gifts.route}>{celebration.gifts.invitationCtaLabel}</LinkButton>
+          </Container>
+        </section>
+      ) : null}
+
       {celebration.blocks.photoGallery && celebration.photos.gallery.length > 0 ? (
         <section className="gallery-section"><Container><SectionTitle>{celebration.labels.gallery}</SectionTitle><div className="gallery-grid">
           {celebration.photos.gallery.map((photo, index) => <EditorialPhoto photo={photo} key={`${photo.alt}-${index}`} />)}
@@ -116,4 +113,3 @@ export default function Home() {
     </main>
   );
 }
-import type { CSSProperties } from "react";

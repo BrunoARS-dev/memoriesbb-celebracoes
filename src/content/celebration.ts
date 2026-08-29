@@ -17,6 +17,26 @@ export type CelebrationPhoto = {
   tone?: "blush" | "olive" | "wine";
 };
 
+export type GiftItem = {
+  name: string;
+  description?: string;
+  reference?: string;
+  link?: string;
+  availability?: string;
+  image?: CelebrationPhoto;
+};
+
+export type GiftListConfig = {
+  route: `/${string}`;
+  invitationCtaLabel?: string;
+  title: string;
+  introduction: string;
+  instructions?: string;
+  actionLabel: string;
+  cover?: CelebrationPhoto;
+  items: GiftItem[];
+};
+
 export type CelebrationConfig = {
   slug: string;
   names: [string, string];
@@ -46,6 +66,7 @@ export type CelebrationConfig = {
   photos: { hero?: CelebrationPhoto; gallery: CelebrationPhoto[] };
   schedule: Array<{ time: string; title: string; description?: string }>;
   dressCode?: { title: string; colors?: string[] };
+  gifts?: GiftListConfig;
   theme?: Partial<{
     canvas: string;
     surface: string;
@@ -127,6 +148,52 @@ export const celebration = {
     title: "Traje social",
     colors: ["#5d1f2b", "#bf7d70", "#dfb7a8", "#68705a", "#ddd0bd"],
   },
+  gifts: {
+    route: "/presentes",
+    invitationCtaLabel: "Ver lista de presentes",
+    title: "Presentes com afeto",
+    introduction:
+      "Esta lista é inteiramente demonstrativa e representa possibilidades para celebrar uma nova fase.",
+    instructions:
+      "Os links abaixo são exemplos. Nenhuma compra, reserva ou confirmação é realizada neste site.",
+    actionLabel: "Ver opção",
+    cover: {
+      alt: "Composição visual demonstrativa da Lista de presentes",
+      tone: "olive",
+    },
+    items: [
+      {
+        name: "Uma nova memória",
+        description: "Contribuição simbólica para uma experiência especial do casal.",
+        reference: "Valor livre — demonstração",
+        link: "https://example.com/contribuicao-demonstrativa",
+        availability: "Disponível — demonstração",
+        image: {
+          alt: "Espaço reservado para a imagem demonstrativa do presente",
+          tone: "blush",
+        },
+      },
+      {
+        name: "Jantar para celebrar",
+        description: "Uma sugestão demonstrativa para um momento a dois.",
+        reference: "Referência demonstrativa",
+        availability: "Disponível — demonstração",
+        image: {
+          alt: "Espaço reservado para a imagem demonstrativa do presente",
+          tone: "olive",
+        },
+      },
+      {
+        name: "Detalhe para o novo lar",
+        description: "Item simbólico, sem marca ou produto real associado.",
+        availability: "Indisponível — demonstração",
+        image: {
+          alt: "Espaço reservado para a imagem demonstrativa do presente",
+          tone: "wine",
+        },
+      },
+    ],
+  },
   theme: {
     canvas: "#f7f1e7",
     surface: "#fffaf2",
@@ -169,5 +236,5 @@ export const celebration = {
     rsvp: "Confirme sua presença",
     rsvpAction: "Confirmar presença",
   },
-  modules: { invitation: true, gifts: false, rsvp: false, gallery: false },
+  modules: { invitation: true, gifts: true, rsvp: false, gallery: false },
 } satisfies CelebrationConfig;
