@@ -105,8 +105,16 @@ export default function Home() {
         </div></Container></section>
       ) : null}
 
-      {celebration.blocks.confirmation && celebration.links.rsvp ? (
-        <section className="rsvp-section" id="confirmacao"><Container className="rsvp-inner"><SectionTitle light>{celebration.labels.rsvp}</SectionTitle>{celebration.texts.rsvp ? <p>{celebration.texts.rsvp}</p> : null}<LinkButton href={celebration.links.rsvp} target="_blank" rel="noreferrer" variant="secondary">{celebration.labels.rsvpAction}</LinkButton></Container></section>
+      {celebration.modules.gallery && celebration.gallery?.invitationCtaLabel ? (
+        <section className="service-link-section" aria-label={celebration.gallery.title}>
+          <Container>
+            <LinkButton href={celebration.gallery.route}>{celebration.gallery.invitationCtaLabel}</LinkButton>
+          </Container>
+        </section>
+      ) : null}
+
+      {celebration.blocks.confirmation && celebration.modules.rsvp && celebration.rsvp?.invitationCtaLabel ? (
+        <section className="rsvp-section" id="confirmacao"><Container className="rsvp-inner"><SectionTitle light>{celebration.labels.rsvp}</SectionTitle>{celebration.texts.rsvp ? <p>{celebration.texts.rsvp}</p> : null}<LinkButton href={celebration.rsvp.route} variant="secondary">{celebration.rsvp.invitationCtaLabel}</LinkButton></Container></section>
       ) : null}
 
       <footer className="site-footer"><Container><p>{celebration.labels.brandName}</p></Container></footer>

@@ -37,6 +37,51 @@ export type GiftListConfig = {
   items: GiftItem[];
 };
 
+export type RsvpConfig = {
+  route: `/${string}`;
+  invitationCtaLabel?: string;
+  title: string;
+  introduction: string;
+  closingMessage: string;
+  deadline?: string;
+  fields: {
+    fullName: true;
+    attendance: true;
+    companions: boolean;
+    note: boolean;
+  };
+  buttons: {
+    submit: string;
+    edit: string;
+  };
+  returnToInvitation?: {
+    href: "/";
+    label: string;
+  };
+};
+
+export type SharedGalleryConfig = {
+  route: `/${string}`;
+  publicUrl: string;
+  invitationCtaLabel?: string;
+  title: string;
+  introduction: string;
+  message?: string;
+  empty: {
+    title: string;
+    message: string;
+  };
+  share: {
+    title: string;
+    description: string;
+    actionLabel: string;
+  };
+  returnToInvitation?: {
+    href: "/";
+    label: string;
+  };
+};
+
 export type CelebrationConfig = {
   slug: string;
   names: [string, string];
@@ -67,6 +112,8 @@ export type CelebrationConfig = {
   schedule: Array<{ time: string; title: string; description?: string }>;
   dressCode?: { title: string; colors?: string[] };
   gifts?: GiftListConfig;
+  rsvp?: RsvpConfig;
+  gallery?: SharedGalleryConfig;
   theme?: Partial<{
     canvas: string;
     surface: string;
@@ -194,6 +241,53 @@ export const celebration = {
       },
     ],
   },
+  rsvp: {
+    route: "/confirmacao",
+    invitationCtaLabel: "Confirmar presença",
+    title: "Esperamos por você",
+    introduction:
+      "Esta confirmação é demonstrativa. Conte para nós se poderá compartilhar este dia especial.",
+    closingMessage:
+      "Obrigada por responder. Nesta demonstração, sua confirmação fica somente neste navegador.",
+    deadline: "Confirme até 20 de abril de 2027 — prazo demonstrativo.",
+    fields: {
+      fullName: true,
+      attendance: true,
+      companions: true,
+      note: true,
+    },
+    buttons: {
+      submit: "Enviar confirmação",
+      edit: "Alterar resposta",
+    },
+    returnToInvitation: {
+      href: "/",
+      label: "Voltar ao Site-convite",
+    },
+  },
+  gallery: {
+    route: "/galeria",
+    publicUrl: "https://example.com/galeria-demonstrativa",
+    invitationCtaLabel: "Revisitar nossas memórias",
+    title: "Memórias que ficam",
+    introduction:
+      "Uma galeria demonstrativa para reunir os olhares, os encontros e os pequenos instantes desta celebração.",
+    message: "As novas fotografias aparecem aqui automaticamente para todos os convidados.",
+    empty: {
+      title: "As primeiras memórias chegarão em breve",
+      message: "Quando as fotografias forem adicionadas, elas aparecerão aqui para todos revisitarem.",
+    },
+    share: {
+      title: "Compartilhe suas fotos",
+      description:
+        "Registre este momento pela câmera ou escolha uma fotografia do seu celular para dividir com todos.",
+      actionLabel: "Adicionar minha foto",
+    },
+    returnToInvitation: {
+      href: "/",
+      label: "Voltar ao Site-convite",
+    },
+  },
   theme: {
     canvas: "#f7f1e7",
     surface: "#fffaf2",
@@ -236,5 +330,5 @@ export const celebration = {
     rsvp: "Confirme sua presença",
     rsvpAction: "Confirmar presença",
   },
-  modules: { invitation: true, gifts: true, rsvp: false, gallery: false },
+  modules: { invitation: true, gifts: true, rsvp: true, gallery: true },
 } satisfies CelebrationConfig;

@@ -1,0 +1,25 @@
+services:
+  app:
+    build:
+      context: .
+      target: runner
+    image: memoriesbb-celebracoes:latest
+    init: true
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${APP_PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      GALLERY_DATA_DIR: /data
+      GALLERY_DATABASE_PATH: /data/gallery.sqlite
+      GALLERY_UPLOAD_DIR: /data/uploads
+      GALLERY_ADMIN_PASSWORD: ${GALLERY_ADMIN_PASSWORD:?defina GALLERY_ADMIN_PASSWORD no arquivo .env}
+    volumes:
+      - gallery-data:/data
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  gallery-data:
+    name: memoriesbb-celebracoes-data
