@@ -1,3 +1,5 @@
+import { weddingDate } from "./wedding-date";
+
 export type CelebrationModule = "invitation" | "gifts" | "rsvp" | "gallery";
 export type InvitationBlock =
   | "cover"
@@ -148,28 +150,32 @@ export type CelebrationConfig = {
   modules: Record<CelebrationModule, boolean>;
 };
 
-// Conteúdo inteiramente demonstrativo. Substitua este objeto para cada celebração.
+// Data e cidade oficiais em wedding-date.ts; demais detalhes ainda contêm exemplos.
 export const celebration = {
-  slug: "ana-e-caio",
-  names: ["Ana", "Caio"],
+  slug: "bia-e-bruno",
+  names: ["Bia", "Bruno"],
   dateTime: {
-    iso: "2027-05-15T16:00:00-03:00",
-    displayDate: "15 de maio de 2027",
-    displayTime: "16h",
-    timeZone: "America/Sao_Paulo",
+    iso: weddingDate.countdownTarget,
+    displayDate: weddingDate.displayDate,
+    displayTime: "Horário a definir",
+    timeZone: weddingDate.timeZone,
   },
   venue: {
-    name: "Espaço de celebração — exemplo",
-    address: "Endereço demonstrativo — Cidade, UF",
+    name: "Local da celebração a definir",
+    address: weddingDate.location,
   },
   texts: {
     headline: "Vamos celebrar juntos",
     description: "Um encontro especial para celebrar uma nova memória.",
     invitation: "Esperamos você para compartilhar este dia com a gente.",
-    details: "Preparamos este encontro com carinho para estarmos perto de quem faz parte da nossa história.",
-    timeline: "Cada momento foi pensado para vivermos o dia com calma, afeto e muitas boas memórias.",
-    dressCode: "Traje social. A paleta abaixo é apenas uma inspiração; queremos que você se sinta à vontade.",
-    story: "Este é um texto demonstrativo sobre encontros, escolhas e os pequenos momentos que fizeram dois caminhos seguirem lado a lado.",
+    details:
+      "Preparamos este encontro com carinho para estarmos perto de quem faz parte da nossa história.",
+    timeline:
+      "Cada momento foi pensado para vivermos o dia com calma, afeto e muitas boas memórias.",
+    dressCode:
+      "Traje social. A paleta abaixo é apenas uma inspiração; queremos que você se sinta à vontade.",
+    story:
+      "Este é um texto demonstrativo sobre encontros, escolhas e os pequenos momentos que fizeram dois caminhos seguirem lado a lado.",
     rsvp: "Sua presença torna este dia ainda mais especial.",
   },
   links: {
@@ -178,7 +184,10 @@ export const celebration = {
     rsvp: "https://example.com/confirmacao-demonstrativa",
   },
   photos: {
-    hero: { alt: "Espaço reservado para a foto principal da celebração", tone: "blush" },
+    hero: {
+      alt: "Espaço reservado para a foto principal da celebração",
+      tone: "blush",
+    },
     gallery: [
       { alt: "Espaço reservado para uma memória do casal", tone: "blush" },
       { alt: "Espaço reservado para uma memória do casal", tone: "wine" },
@@ -186,10 +195,26 @@ export const celebration = {
     ],
   },
   schedule: [
-    { time: "16h", title: "Chegada", description: "Boas-vindas e encontro dos convidados." },
-    { time: "16h30", title: "Celebração", description: "O momento principal do nosso dia." },
-    { time: "18h", title: "Brinde", description: "Um instante para celebrar juntos." },
-    { time: "19h", title: "Recepção", description: "Comida, conversa e boas memórias." },
+    {
+      time: "16h",
+      title: "Chegada",
+      description: "Boas-vindas e encontro dos convidados.",
+    },
+    {
+      time: "16h30",
+      title: "Celebração",
+      description: "O momento principal do nosso dia.",
+    },
+    {
+      time: "18h",
+      title: "Brinde",
+      description: "Um instante para celebrar juntos.",
+    },
+    {
+      time: "19h",
+      title: "Recepção",
+      description: "Comida, conversa e boas memórias.",
+    },
   ],
   dressCode: {
     title: "Traje social",
@@ -211,7 +236,8 @@ export const celebration = {
     items: [
       {
         name: "Uma nova memória",
-        description: "Contribuição simbólica para uma experiência especial do casal.",
+        description:
+          "Contribuição simbólica para uma experiência especial do casal.",
         reference: "Valor livre — demonstração",
         link: "https://example.com/contribuicao-demonstrativa",
         availability: "Disponível — demonstração",
@@ -272,10 +298,12 @@ export const celebration = {
     title: "Memórias que ficam",
     introduction:
       "Uma galeria demonstrativa para reunir os olhares, os encontros e os pequenos instantes desta celebração.",
-    message: "As novas fotografias aparecem aqui automaticamente para todos os convidados.",
+    message:
+      "As novas fotografias aparecem aqui automaticamente para todos os convidados.",
     empty: {
       title: "As primeiras memórias chegarão em breve",
-      message: "Quando as fotografias forem adicionadas, elas aparecerão aqui para todos revisitarem.",
+      message:
+        "Quando as fotografias forem adicionadas, elas aparecerão aqui para todos revisitarem.",
     },
     share: {
       title: "Compartilhe suas fotos",
