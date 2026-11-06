@@ -15,11 +15,11 @@ export const metadata: Metadata = {
 };
 
 export default function SaveTheDatePage() {
-  const { props: desktop } = getImageProps({ src: "/al-mare/invitation-background.webp", alt: "", width: 1536, height: 1024, sizes: "100vw", loading: "eager", fetchPriority: "high" });
+  const { props: desktop } = getImageProps({ src: "/al-mare/save-the-date-desktop.png", alt: "", width: 1536, height: 1024, unoptimized: true, loading: "eager", fetchPriority: "high" });
   return <main className={`${styles.page} ${editorial.variable} ${sans.variable}`}>
     <picture className={styles.background}>
       <source media="(max-width: 760px)" srcSet="/al-mare/save-the-date-mobile-v2.webp" />
-      {/* getImageProps preserves Next image optimization with art-directed sources. */}
+      {/* Serve the original desktop artwork without another lossy compression pass. */}
       <img {...desktop} alt="" />
     </picture>
     <article className={styles.invitation} aria-labelledby="save-the-date-title">
